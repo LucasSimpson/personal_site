@@ -1,0 +1,47 @@
+body {
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#top-spacer {
+    height: 8vh;
+}
+
+#main-content {
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) );
+    box-shadow: 0px 0px 40px 40px rgba(0, 0, 0, 0.6); /* change to alter the effect*/
+    margin-bottom: 350px;
+}
+
+#side-nav {
+    background-color: #fafafa;
+    padding: 0;
+}
+
+#side-nav a {
+    color: #333;
+}
+
+#side-nav .nav-link {
+    font-size: 20px;
+    padding-right: 40px;
+}
+
+.nav > li+li {
+    margin-top: 0;
+}
+
+.icon-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon-links > .icon-link {
+    padding: 10px 0;
+    font-size: 26px;
+    color: #333;
+}
