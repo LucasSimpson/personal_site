@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+
+{% block cssimports %}
+    <link href="{% static 'css/work_experience/work_experience.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="work-history-card">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h3>SDE Intern</h3>
+                        <h4>Amazon</h4>
+                        <h6>May 2016 - August 2016 | Toronto, CA</h6>
+                    </div>
+                    <div class="col-xs-2">
+                        <img class="img-responsive img-circle" src="{% static 'images/amazon.jpg' %}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>java, Spring, python, html, css, statistical methods, various AWS components</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="work-history-card">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h3>SDE Intern</h3>
+                        <h4>Amazon</h4>
+                        <h6>May 2015 - August 2015 | Toronto, CA</h6>
+                    </div>
+                    <div class="col-xs-2">
+                        <img class="img-responsive img-circle" src="{% static 'images/amazon.jpg' %}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>java, Spring, html, css, various AWS components</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="work-history-card">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h3>Web Developer</h3>
+                        <h4>Irie Group</h4>
+                        <h6>April 2014 - July 2014 | Ottawa, CA</h6>
+                    </div>
+                    <div class="col-xs-2">
+                        <img class="img-responsive img-circle" src="{% static 'images/irie_group.jpg' %}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>Worked in a team to create websites that fit the customers requirements. Responsabilities included building the back-end components, building dynamic content, managing site, and some front-end design.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="work-history-card">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h3>Replacement Drums Instructor</h3>
+                        <h4>Ottawa Conservatory of Vocal and Dance</h4>
+                        <h6>October 2012 - May 2013 | Ottawa, CA</h6>
+                    </div>
+                    <div class="col-xs-2">
+                        <img class="img-responsive img-circle" src="{% static 'images/drums.png' %}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>Replaced the full-time drums instructor whenever he was away. Worked with young kids as well as adults to improve their drumming skills.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

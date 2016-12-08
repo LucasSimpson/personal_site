@@ -1,0 +1,10 @@
+
+.work-history-card {
+    padding: 0 20px;
+    background: #fafafa;
+    margin-bottom: 15px;
+}
+
+.work-history-card + .work-history-card {
+    margin-top: 15px;
+}
