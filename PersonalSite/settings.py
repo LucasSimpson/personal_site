@@ -27,11 +27,10 @@ except ImportError:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', True)
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '82jfdcutig.execute-api.us-east-1.amazonaws.com',
+    'localhost' if DEBUG else '82jfdcutig.execute-api.us-east-1.amazonaws.com',
 ]
 
 
