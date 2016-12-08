@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+
+{% block cssimports %}
+    <link href="{% static 'css/index/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="top-spacer"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-responsive img-rounded" src="{% static 'images/me.jpg' %}">
+        </div>
+        <div class="col-md-9">
+            <h1>Suuuuuuuh dude</h1>
+        </div>
+    </div>
+
+{% endblock %}
