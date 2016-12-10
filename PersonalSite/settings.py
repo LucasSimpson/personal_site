@@ -43,8 +43,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     # 'django.contrib.admin',
-    # 'django.contrib.auth',
-    # 'django.contrib.contenttypes',
+    'django.contrib.auth', # uncommented so rest_framework works
+    'django.contrib.contenttypes', # uncommented so rest_framework works
     # 'django.contrib.sessions',
     # 'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -52,11 +52,17 @@ INSTALLED_APPS = [
     # main app
     'index',
 
+    # API
+    'api',
+
     # S3 file storage
     'storages',
 
     # DynamoDB
     'django_dynamodb',
+
+    # django rest framework
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -159,3 +165,12 @@ STATICFILES_DIRS = [
 
 # DynamoDB
 DYNAMO_TABLE_PREFIX = 'PersonalSite'
+
+# Django Rest Framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}

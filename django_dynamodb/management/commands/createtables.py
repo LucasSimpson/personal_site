@@ -12,6 +12,7 @@ class Command(BaseCommand):
         models = manager.get_models()
 
         for model in models:
+
             table_name = manager.get_table_name(model)
             try:
                 manager.create_table(model)
