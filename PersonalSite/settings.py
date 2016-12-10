@@ -27,6 +27,8 @@ try:
 except ImportError:
     SECRET_KEY = os.environ.get('SECRET_KEY', None)
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
+    DYNAMO_ACCESS_KEY = os.environ.get('DYNAMO_ACCESS_KEY', None)
+    DYNAMO_SECRET_ACCESS_KEY = os.environ.get('DYNAMO_SECRET_ACCESS_KEY', None)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
