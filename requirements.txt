@@ -1,5 +1,4 @@
 base58==0.2.4
-boto==2.43.0
 boto3==1.4.1
 botocore==1.4.80
 click==6.6

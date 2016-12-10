@@ -21,6 +21,9 @@ try:
     import secret_settings
     SECRET_KEY = secret_settings.SECRET_KEY
     AWS_SECRET_ACCESS_KEY = secret_settings.AWS_SECRET_ACCESS_KEY
+    DYNAMO_ACCESS_KEY = secret_settings.DYNAMO_ACCESS_KEY
+    DYNAMO_SECRET_ACCESS_KEY = secret_settings.DYNAMO_SECRET_ACCESS_KEY
+
 except ImportError:
     SECRET_KEY = os.environ.get('SECRET_KEY', None)
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
@@ -39,7 +42,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     # 'django.contrib.admin',
     # 'django.contrib.auth',
-    'django.contrib.contenttypes',
+    # 'django.contrib.contenttypes',
     # 'django.contrib.sessions',
     # 'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -49,6 +52,9 @@ INSTALLED_APPS = [
 
     # S3 file storage
     'storages',
+
+    # DynamoDB
+    'django_dynamodb',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +155,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+# DynamoDB
+DYNAMO_TABLE_PREFIX = 'PersonalSite'
