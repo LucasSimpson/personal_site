@@ -1,5 +1,6 @@
-import boto3
+import logging
 
+import boto3
 from django.conf import settings
 
 
@@ -64,6 +65,7 @@ class DynamoDBManager(object):
         return schema
 
     def __init__(self):
+        self.logger = logging.getLogger(__name__)
         dynamo_access_key = settings.DYNAMO_ACCESS_KEY
         dynamo_secret_access_key = settings.DYNAMO_SECRET_ACCESS_KEY
         DynamoDBManager.table_prefix = settings.DYNAMO_TABLE_PREFIX
@@ -103,5 +105,5 @@ class DynamoDBManager(object):
 
     # register a model
     def register_model(self, model):
-        print('registering %s' % model)
+        self.logger.info('registering %s' % model)
         self._models.append(model)

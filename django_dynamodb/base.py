@@ -1,16 +1,14 @@
+import logging
+
 from fields import HashNestedKey, RangeNestedKey, ModelField
 from manager import DynamoDBManager
-
 from .exceptions import ItemNotFoundException
 from .queryset import QuerySet
 
+logger = logging.getLogger(__name__)
 
-def class_wrapper(cls):
-    print(cls)
-    return cls
 
 # DynamoDB model
-@class_wrapper
 class BaseModel(object):
     isSet = False  # static hack :(
 
@@ -63,6 +61,7 @@ class BaseModel(object):
         for attr in self.__class__.model_fields():
             model_data[attr[2:]] = self.encoded(attr)
 
+        logger.debug('Saving item to DB, Item=%s' % model_data)
         self.table.put_item(Item=model_data)
 
     # delete item from dynamo :(
@@ -77,6 +76,7 @@ class BaseModel(object):
             range_key[2:]: range_key_value
         }
 
+        logger.debug('Deleting item from DB, Key=%s' % key)
         self.table.delete_item(Key=key )
 
     # returns a queryset of all objects
