@@ -15,6 +15,7 @@ class Command(BaseCommand):
 
             table_name = manager.get_table_name(model)
             try:
+                self.stdout.write('Creating table %s...' % table_name)
                 manager.create_table(model)
                 self.stdout.write(self.style.SUCCESS('%s created...' % table_name))
             except ClientError:

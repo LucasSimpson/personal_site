@@ -18,7 +18,7 @@ class QuerySet(object):
 
         models = list()
         for datum in data:
-            model = self._cls()
+            model = self._cls(from_db=True)
             for key in datum:
                 value = datum[key]
                 decoded = model.decoded('__%s' % key, value)

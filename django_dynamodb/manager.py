@@ -103,4 +103,5 @@ class DynamoDBManager(object):
 
     # register a model
     def register_model(self, model):
+        print('registering %s' % model)
         self._models.append(model)

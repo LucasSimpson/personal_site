@@ -1,10 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
 
-from .dynamomodels import PriorWork
-from .serializers import PriorWorkSerializer
+from workexperience.dynamomodels import WorkExperience
+from .serializers import WorkExperienceSerializer
 
 
-class PriorWorkViewSet(ModelViewSet):
-    queryset = PriorWork.all()
-    serializer_class = PriorWorkSerializer
+class WorkExperienceViewSet(ModelViewSet):
+    queryset = WorkExperience.all()
+    serializer_class = WorkExperienceSerializer
 
