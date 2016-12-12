@@ -2,13 +2,15 @@ from fields import HashKey, RangeKey, ModelField
 from manager import DynamoDBManager
 
 from .exceptions import ItemNotFoundException
+from .queryset import QuerySet
 
 # DynamoDB model
 class BaseModel(object):
+    isSet = False  # static hack :(
 
-    # get all attributes that are ModelFields
+    # get all attributes of a class that are ModelFields subclasses
     @classmethod
-    def model_attributes(cls):
+    def model_fields(cls):
         for attr in cls.__dict__:
             if isinstance(cls.__dict__[attr], ModelField):
                 yield attr
@@ -16,48 +18,62 @@ class BaseModel(object):
     # get the hash key attribute
     @classmethod
     def get_hash_key(cls):
-        for attr in cls.model_attributes():
+        for attr in cls.model_fields():
             if isinstance(cls.__dict__[attr], HashKey):
                 return attr
 
     # get the range key attribute
     @classmethod
     def get_range_key(cls):
-        for attr in cls.model_attributes():
+        for attr in cls.model_fields():
             if isinstance(cls.__dict__[attr], RangeKey):
                 return attr
+
+    # rebind cls and self attributes. for each ModelField (name, instance) (n, mf):
+    # delete cls[n]
+    # set cls['__%s' % n] as mf
+    # set self.[mf] as None, is now just a regular attribute user can set/get
+    # note that we have to check to see if we have rebound on the class already..
+    # theres def a better way of doing this tbh
+    # TODO redisign this honestly it works but its kinda messy
+    def __new__(cls, *args, **kwargs):
+        instance = super(BaseModel, cls).__new__(cls, *args, **kwargs)
+
+        for attr in list(cls.model_fields()):
+            field = getattr(cls, attr)
+
+            if cls.isSet:
+                setattr(instance, attr[2:], None)
+            else:
+                delattr(cls, attr)
+                setattr(cls, '__%s' % attr, field)
+                setattr(instance, attr, None)
+
+        if not cls.isSet:
+            cls.isSet = True
+
+        return instance
 
     def __init__(self):
         self.manager = DynamoDBManager.get_manager()
         self.table = self.manager.get_table(self.__class__)
 
-        # decorate all modelFields with getters/setters
-        for attr in self.__class__.model_attributes():
-
-            model_field = self.__class__.__dict__[attr]
-            setattr(self, '__%s' % attr, model_field)
-
-            def getter(s):
-                return model_field.value
-            def setter(s, value):
-                model_field.value = value
-            setattr(self, attr, property(getter, setter))
-
-    # get encoded representation of field's value
+    # get encoded representation of field's value. attr points too a ModelField instance
+    # python -> db
     def encoded(self, attr):
-        return getattr(self, '__%s' % attr).encoded()
+        value = getattr(self, attr[2:])  # pull current value
+        return getattr(self, attr).encoded(value)
 
-    # set the value of a field from an encoded value
+    # set the value of a field from an encoded value. attr points too a ModelField instance
+    # db -> python
     def decoded(self, attr, value):
-        return getattr(self, '__%s' % attr).decoded(value)
+        return getattr(self, attr).decoded(value)
 
     # save an item in dynamo
     def save(self):
-        print(self.__dict__)
-        print(self.chrono_order)
         model_data = dict()
-        for attr in self.__class__.model_attributes():
-            model_data[attr] = self.encoded(attr)
+        for attr in self.__class__.model_fields():
+            model_data[attr[2:]] = self.encoded(attr)
 
         print('calling save with %s' % model_data)
         self.table.put_item(Item=model_data)
@@ -68,35 +84,19 @@ class BaseModel(object):
         range_key = self.__class__.get_range_key()
         hash_key_value = self.encoded(hash_key)
         range_key_value = self.encoded(range_key)
-        self.table.delete_item(
-            Key={
-                hash_key: getattr(self, hash_key_value),
-                range_key: getattr(self, range_key_value)
-            }
-        )
 
-    # returns an iterator containing all objects db
-    # TODO make this lazy AF
+        key = {
+            hash_key[2:]: hash_key_value,
+            range_key[2:]: range_key_value
+        }
+
+        print('calling delete with key=%s' % key)
+        self.table.delete_item(Key=key )
+
+    # returns a queryset of all objects
     @classmethod
     def all(cls):
-        table = DynamoDBManager.get_manager().get_table(cls)
-        response = table.scan()
-
-        data = response['Items']
-        while 'LastEvaluatedKey' in response:
-            response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
-            data.extend(response['Items'])
-
-        models = list()
-        for datum in data:
-            model = cls()
-            for key in datum:
-                value = datum[key]
-                decoded = model.decoded(key, value)
-                setattr(model, key, decoded)
-            models.append(model)
-
-        return models
+        return QuerySet(cls)
 
     # returns a single object form db based on hash key and range key
     # TODO optimize this lmfao

@@ -1,21 +1,24 @@
 
+
+# fields hold no value. they are there purely for description, validation,
+# and as an adapter between db storage and python rep
 class ModelField(object):
 
+    # proto is a string representing dynamoBD storage type, ex 'S'/'N'/'B'
     @classmethod
-    def get_proto(clz):
-        if hasattr(clz, 'proto'):
-            return clz.proto
+    def get_proto(cls):
+        if hasattr(cls, 'proto'):
+            return cls.proto
 
         raise NotImplemented('Subclass of ModelField must either declare proto value or override get_proto method')
 
-    def __init__(self):
-        self.value = None
+    # encode value from python -> db
+    def encoded(self, value):
+        raise NotImplemented('%s is a subclass of ModelField, and as such should implement \'encoded\' method.' % self.__class__)
 
-    def encoded(self):
-        return self.value
-
+    # decode value from db -> python
     def decoded(self, value):
-        return value
+        raise NotImplemented('%s is a subclass of ModelField, and as such should implement \'decoded\' method.' % self.__class__)
 
 
 class KeyField(ModelField):
@@ -25,8 +28,8 @@ class KeyField(ModelField):
     def get_proto(self):
         return self._nested_field.get_proto()
 
-    def encoded(self):
-        return self._nested_field.encoded()
+    def encoded(self, value):
+        return self._nested_field.encoded(value)
 
     def decoded(self, value):
         return self._nested_field.decoded(value)
@@ -43,31 +46,18 @@ class RangeKey(KeyField):
 class NumberField(ModelField):
     proto = 'N'
 
-    def encoded(self):
-        print('encoding number field, value is %s' % self.value)
-        if self.value is not None:
-            return int(self.value)
-        else:
-            return 0
+    def encoded(self, value):
+        return int(value) if value is not None else None
 
     def decoded(self, value):
-        if value is not None:
-            return int(value)
-        else:
-            return None
+        return int(value) if value is not None else None
 
 
 class CharField(ModelField):
     proto = 'S'
 
-    def encoded(self):
-        if self.value is not None:
-            return str(self.value)
-        else:
-            return 'null'
+    def encoded(self, value):
+        return str(value) if value is not None else None
 
     def decoded(self, value):
-        if value is not None:
-            return str(value)
-        else:
-            return None
+        return str(value) if value is not None else None
