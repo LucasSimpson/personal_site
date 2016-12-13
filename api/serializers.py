@@ -3,7 +3,11 @@ from rest_framework import serializers
 from workexperience.dynamomodels import WorkExperience
 
 
-class WorkExperienceSerializer(serializers.Serializer):
+class LucasAuthenticationSerializer(serializers.Serializer):
+    auth_token = serializers.CharField(write_only=True)
+
+
+class WorkExperienceSerializer(LucasAuthenticationSerializer):
     chrono_order = serializers.IntegerField()
     title = serializers.CharField()
     company = serializers.CharField()

@@ -23,12 +23,14 @@ try:
     AWS_SECRET_ACCESS_KEY = secret_settings.AWS_SECRET_ACCESS_KEY
     DYNAMO_ACCESS_KEY = secret_settings.DYNAMO_ACCESS_KEY
     DYNAMO_SECRET_ACCESS_KEY = secret_settings.DYNAMO_SECRET_ACCESS_KEY
+    AUTH_TOKEN = secret_settings.AUTH_TOKEN
 
 except ImportError:
     SECRET_KEY = os.environ.get('SECRET_KEY', None)
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
     DYNAMO_ACCESS_KEY = os.environ.get('DYNAMO_ACCESS_KEY', None)
     DYNAMO_SECRET_ACCESS_KEY = os.environ.get('DYNAMO_SECRET_ACCESS_KEY', None)
+    AUTH_TOKEN = os.environ.get('AUTH_TOKEN', None)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -172,5 +174,8 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'api.auth.IsLucasAuthentication'
+    ],
 }
