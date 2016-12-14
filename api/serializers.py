@@ -8,6 +8,8 @@ class LucasAuthenticationSerializer(serializers.Serializer):
 
 
 class WorkExperienceSerializer(LucasAuthenticationSerializer):
+    #url = serializers.HyperlinkedIdentityField(view_name='work_experience-detail', read_only=True, lookup_field='id', lookup_url_kwarg='pk')
+    id = serializers.IntegerField(read_only=True)
     chrono_order = serializers.IntegerField()
     title = serializers.CharField()
     company = serializers.CharField()
@@ -24,5 +26,15 @@ class WorkExperienceSerializer(LucasAuthenticationSerializer):
         prior_work.dates = validated_data['dates']
         prior_work.location = validated_data['location']
         prior_work.body = validated_data['body']
+        prior_work.img_url = validated_data['img_url']
         prior_work.save()
         return prior_work
+
+    def update(self, instance, validated_data):
+        # TODO have some sort of Model.bind(data) method or something
+        # or set getters/setters on model attributes for typecasting?
+
+        print('in update')
+        print('%s :: %s' % (instance, validated_data))
+
+        return instance

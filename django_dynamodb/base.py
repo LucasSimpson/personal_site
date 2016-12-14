@@ -96,3 +96,15 @@ class BaseModel(object):
                 return model
 
         raise ItemNotFoundException('%s with (hash_key=%s, range_key=%s) wasn\'t found in dynamo' % (cls.__name__, hash_key_value, range_key_value))
+
+    # returns all objects matching the hash key
+    # TODO optimize this lmfao
+    @classmethod
+    def filter_hashkey(cls, hash_key_value):
+        hash_key = cls.get_hash_key()[2:]
+        models = []
+        for model in cls.all():
+            if getattr(model, hash_key) == hash_key_value:
+                models.append(model)
+
+        return models
