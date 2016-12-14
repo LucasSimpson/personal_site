@@ -68,6 +68,12 @@ INSTALLED_APPS = [
 
     # django rest framework
     'rest_framework',
+
+    # work experience
+    'workexperience',
+
+    # fun links
+    'funlinks',
 ]
 
 MIDDLEWARE = [

@@ -30,11 +30,11 @@ class DynamoDBManager(object):
 
         schema = [
             {
-                'AttributeName': hash_key,
+                'AttributeName': hash_key[2:],
                 'KeyType': 'HASH'
             },
             {
-                'AttributeName': range_key,
+                'AttributeName': range_key[2:],
                 'KeyType': 'RANGE'
             }
         ]
@@ -53,11 +53,11 @@ class DynamoDBManager(object):
 
         schema = [
             {
-                'AttributeName': hash_key,
+                'AttributeName': hash_key[2:],
                 'AttributeType': cls.__dict__[hash_key].get_proto()
             },
             {
-                'AttributeName': range_key,
+                'AttributeName': range_key[2:],
                 'AttributeType': cls.__dict__[range_key].get_proto()
             }
         ]
@@ -81,10 +81,12 @@ class DynamoDBManager(object):
     def create_table(self, cls, read_units=1, write_units=1):
         # make table
         table_name = DynamoDBManager.get_table_name(cls)
+        key_schema = DynamoDBManager._build_key_schema(cls)
+        attribute_def = DynamoDBManager._build_attribute_schema(cls)
         table = self._conn.create_table(
             TableName=table_name,
-            KeySchema=DynamoDBManager._build_key_schema(cls),
-            AttributeDefinitions=DynamoDBManager._build_attribute_schema(cls),
+            KeySchema=key_schema,
+            AttributeDefinitions=attribute_def,
             ProvisionedThroughput={
                 'ReadCapacityUnits': read_units,
                 'WriteCapacityUnits': write_units,
@@ -104,6 +106,7 @@ class DynamoDBManager(object):
         return self._models
 
     # register a model
+    # TODO ignore duplicate registers
     def register_model(self, model):
         self.logger.info('registering %s' % model)
         self._models.append(model)

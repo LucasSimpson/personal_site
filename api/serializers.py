@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from workexperience.dynamomodels import WorkExperience
-
+from funlinks.dynamomodels import FunLink
 
 class LucasAuthenticationSerializer(serializers.Serializer):
     auth_token = serializers.CharField(write_only=True)
@@ -31,10 +31,23 @@ class WorkExperienceSerializer(LucasAuthenticationSerializer):
         return prior_work
 
     def update(self, instance, validated_data):
-        # TODO have some sort of Model.bind(data) method or something
-        # or set getters/setters on model attributes for typecasting?
+        instance.update(**validated_data)
+        return instance
 
-        print('in update')
-        print('%s :: %s' % (instance, validated_data))
 
+class FunLinkSerializer(LucasAuthenticationSerializer):
+    id = serializers.IntegerField(read_only=True)
+    link = serializers.CharField()
+    title = serializers.CharField()
+
+    def create(self, validated_data):
+        fun_link = FunLink()
+        #fun_link.link = validated_data['link']
+        #fun_link.title = validated_data['title']
+        fun_link.bind(**validated_data)
+        fun_link.save()
+        return fun_link
+
+    def update(self, instance, validated_data):
+        instance.update(**validated_data)
         return instance

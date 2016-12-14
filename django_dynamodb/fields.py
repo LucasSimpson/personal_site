@@ -25,6 +25,10 @@ class ModelField(object):
     def decoded(self, value):
         raise NotImplemented('%s is a subclass of ModelField, and as such should implement \'decoded\' method.' % self.__class__)
 
+    # cast an input to corresponding type for comparisons. default pass-through
+    def cast(self, value):
+        return value
+
 
 # generic Field that nests another field, delegates responsiblity to nested field
 class NestedKeyField(ModelField):
@@ -42,6 +46,9 @@ class NestedKeyField(ModelField):
 
     def decoded(self, value):
         return self._nested_field.decoded(value)
+
+    def cast(self, value):
+        return self._nested_field.cast(value)
 
 
 # hash key
@@ -64,6 +71,9 @@ class NumberField(ModelField):
     def decoded(self, value):
         return int(value) if value is not None else None
 
+    def cast(self, value):
+        return int(value)
+
 
 # generic field for holding a string
 class CharField(ModelField):
@@ -74,6 +84,9 @@ class CharField(ModelField):
 
     def decoded(self, value):
         return str(value) if value is not None else None
+
+    def cast(self, value):
+        return str(value)
 
 
 # number field that auto increments for each new item

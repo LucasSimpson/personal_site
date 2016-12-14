@@ -34,13 +34,28 @@ class QuerySet(object):
 
         return models
 
+    # given a set of kwargs (ex {'id': '4'}) filters the queryset for only matching items
+    # TODO return new queryset. This isnt super trivial - there are cache issues with storing the models that have to be
+    # figured out :(
+    def filter(self, **filter_args):
+        models = self._get_models()
+        filtered = list()
+
+        for model in models:
+            matches = True
+            for attr, value in filter_args.items():
+                field = self._cls.get_model_field(attr)
+                if field.cast(value) != getattr(model, attr):
+                    matches = False
+
+            if matches:
+                filtered.append(model)
+
+        return filtered
+
+    # return first instance matching kwargs
     def get(self, *args, **kwargs):
-        print('queryset GET called with %s, %s' % (args, kwargs))
-        # TODO implement this for real
-        id = int(kwargs['id'])
-        instance = self._cls.filter_hashkey(id)[0]
-        print('found model %s' % instance)
-        return instance
+        return self.filter(**kwargs)[0]
 
     def __iter__(self):
         return self._get_models().__iter__()

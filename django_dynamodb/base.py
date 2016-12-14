@@ -9,6 +9,8 @@ logger = logging.getLogger(__name__)
 
 
 # DynamoDB model
+# TODO put all meta shit in _meta attribute of Meta class
+# TODO get rid of all these loops and use dicts for lookup
 class BaseModel(object):
     isSet = False  # static hack :(
 
@@ -32,6 +34,14 @@ class BaseModel(object):
         for attr in cls.model_fields():
             if isinstance(cls.__dict__[attr], RangeNestedKey):
                 return attr
+
+    # given an attr (ex 'id') return the associated ModelField instance (ex instance of IntegerField)
+    @classmethod
+    def get_model_field(cls, field):
+        for model_field in cls.model_fields():
+            if model_field[2:] == field:
+                return getattr(cls, model_field)
+        return None
 
     def __init__(self, from_db=False):
         self.manager = DynamoDBManager.get_manager()
@@ -64,6 +74,18 @@ class BaseModel(object):
         logger.debug('Saving item to DB, Item=%s' % model_data)
         self.table.put_item(Item=model_data)
 
+    # given a dictionary of {field: value} bind the data
+    def bind(self, **data):
+        for attr, value in data.items():
+            field = self.__class__.get_model_field(attr)
+            if field is not None:
+                setattr(self, attr, field.cast(value))
+
+    # given a dictionary of {field: value} bind and save the data
+    def update(self, **data):
+        self.bind(**data)
+        self.save()
+
     # delete item from dynamo :(
     def delete(self):
         hash_key = self.__class__.get_hash_key()
@@ -86,6 +108,8 @@ class BaseModel(object):
 
     # returns a single object form db based on hash key and range key
     # TODO optimize this lmfao
+    # TODO move to object manager
+    # TODO return queryset?
     @classmethod
     def get(cls, hash_key_value, range_key_value):
         hash_key = cls.get_hash_key()[2:]
@@ -99,6 +123,8 @@ class BaseModel(object):
 
     # returns all objects matching the hash key
     # TODO optimize this lmfao
+    # TODO move to object manager
+    # TODO return queryset?
     @classmethod
     def filter_hashkey(cls, hash_key_value):
         hash_key = cls.get_hash_key()[2:]
