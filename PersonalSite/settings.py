@@ -34,7 +34,7 @@ except ImportError:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DEBUG', 'f') == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
