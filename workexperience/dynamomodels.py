@@ -11,6 +11,7 @@ class WorkExperience(BaseModel):
     location = fields.CharField()
     body = fields.CharField()
     img_url = fields.CharField()
+    rich_img_url = fields.CharField()
 
 
 

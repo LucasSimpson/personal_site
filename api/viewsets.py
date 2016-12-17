@@ -3,7 +3,9 @@ from rest_framework.viewsets import ModelViewSet
 
 from funlinks.dynamomodels import FunLink
 from workexperience.dynamomodels import WorkExperience
-from .serializers import WorkExperienceSerializer, FunLinkSerializer
+from interests.dynamomodels import Interests
+
+from .serializers import WorkExperienceSerializer, FunLinkSerializer, InterestsSerializer
 
 
 class WorkExperienceViewSet(ModelViewSet):
@@ -26,3 +28,14 @@ class FunLinkViewSet(ModelViewSet):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+
+class InterestsViewSet(ModelViewSet):
+    queryset = Interests.all()
+    serializer_class = InterestsSerializer
+    lookup_field = 'id'
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serialzer = self.get_serializer(instance)
+        return Response(serialzer.data)

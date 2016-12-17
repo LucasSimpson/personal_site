@@ -1,0 +1,1 @@
+from dynamomodels import Interests
