@@ -37,7 +37,8 @@ except ImportError:
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
-    'localhost' if DEBUG else '82jfdcutig.execute-api.us-east-1.amazonaws.com',
+    'localhost',
+    '82jfdcutig.execute-api.us-east-1.amazonaws.com',
 ]
 
 
@@ -50,9 +51,6 @@ INSTALLED_APPS = [
     # 'django.contrib.sessions',
     # 'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # cors
-    'corsheaders',
 
     # main app
     'index',
@@ -74,15 +72,19 @@ INSTALLED_APPS = [
 
     # fun links
     'funlinks',
+
+    # corsheaders
+    'corsheaders',
 ]
 
+
 MIDDLEWARE = [
+    # cors middleware
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     # 'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.messages.middleware.MessageMiddleware',
@@ -141,6 +143,24 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -190,11 +210,17 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'api.auth.IsLucasAuthentication'
     ],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
 
 # cors
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000' if DEBUG else '82jfdcutig.execute-api.us-east-1.amazonaws.com'
+    'localhost:3000',
+    'localhose:8000',
+    '82jfdcutig.execute-api.us-east-1.amazonaws.com',
 )
