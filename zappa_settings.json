@@ -1,0 +1,6 @@
+{
+    "dev": {
+        "django_settings": "PersonalSite.settings", 
+        "s3_bucket": "zappa-21u2df0br"
+    }
+}
