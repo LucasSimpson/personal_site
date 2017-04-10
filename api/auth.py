@@ -17,10 +17,10 @@ class IsLucasAuthentication(authentication.BaseAuthentication):
 
         # we only care about POST requests
         if request.method == 'POST':
-            token = request.POST.get('auth_token', None)
+            token = request.data.get('auth_token', None)
 
             if not token or token != settings.AUTH_TOKEN:
-                raise exceptions.AuthenticationFailed('Invalid auth token')
+                raise exceptions.AuthenticationFailed('Invalid auth token: %s' % token)
 
             return 'Lucas', None
 

@@ -4,6 +4,7 @@ from workexperience.dynamomodels import WorkExperience
 from funlinks.dynamomodels import FunLink
 from interests.dynamomodels import Interests
 
+
 class LucasAuthenticationSerializer(serializers.Serializer):
     auth_token = serializers.CharField(write_only=True)
 
@@ -26,7 +27,6 @@ class WorkExperienceSerializer(LucasAuthenticationSerializer):
         return prior_work
 
     def update(self, instance, validated_data):
-        print('in update')
         instance.update(**validated_data)
         return instance
 

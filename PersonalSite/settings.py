@@ -223,4 +223,5 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
     'localhose:8000',
     '82jfdcutig.execute-api.us-east-1.amazonaws.com',
+    'chrome-extension://bmgifnpfipncepniifhkfafggjinghhb',
 )
