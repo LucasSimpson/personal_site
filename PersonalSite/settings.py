@@ -218,10 +218,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 
-# cors
+# cors. No way to whitelist chrome extension, so here we are
+CORS_ORIGIN_ALLOW_ALL = True
+"""
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
     'localhose:8000',
     '82jfdcutig.execute-api.us-east-1.amazonaws.com',
-    'chrome-extension://bmgifnpfipncepniifhkfafggjinghhb',
 )
+"""
+
