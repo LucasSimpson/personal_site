@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SOURCE_DIR=.
+OUTPUT_DIR=../static/css
+
+FILES=$(find $SOURCE_DIR -type f -name '*.scss')
+
+for file in $FILES
+do
+    echo $file
+
+    # get filename without extension
+    filename="${file%.*}"
+    echo $filename
+    sass --style compressed --watch $SOURCE_DIR/$file:$OUTPUT_DIR/$filename.css &
+    echo $OUTPUT_DIR/$filename.css
+done

@@ -2,3 +2,4 @@ venv/
 .idea/
 *.pyc
 PersonalSite/secret_settings.py
+scss/.sass-cache
