@@ -1,0 +1,44 @@
+{% extends 'alt/base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+    <link href="{% static 'css/work_experience/work_experience.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div id="work-experience">
+        {% for work in work_experiences %}
+            <div class="work-experience-card card">
+
+                <div class="wec-header">
+                    <img class="header-icon" src="{{ work.img_url }}">
+                    <div> <!-- wec-header is flex display, we want these stacked vertically -->
+                        <p class="title">{{ work.title }}</p>
+                        <p class="subtitle">{{ work.company }}</p>
+                    </div>
+                </div>
+
+                <img class="image-responsive" src="{{ work.rich_img_url }}">
+
+                <div class="sub-info">
+                    <div class="si-line">
+                        <p class="icon"><span class="fa fa-clock-o" aria-hidden="true"></span></p>
+                        <p class="text">{{ work.dates }}</p>
+                    </div>
+                    <div class="si-line">
+                        <p class="icon"><span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                        <p class="text">{{ work.location }}</p>
+                    </div>
+                </div>
+
+                <p class="wec-body">{{ work.body }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="work-experience-title">
+        <h1>Work Experience</h1>
+        <p>Above you'll some of my work experience. <a id="resume-link" href="#">Here</a> is where you can find a copy of my resume, when I get around to uploading it.</p>
+    </div>
+
+{% endblock %}
