@@ -9,12 +9,12 @@
   padding: 0 $SPACE;
 
   a {
-    color: $accent-200;
+    color: $secondary-dark;
   }
 }
 
 #fun-links {
-  background: $primary-500;
+  background: $primary;
   width: 100%;
   padding: $SPACE;
 
@@ -44,7 +44,7 @@
     border-color: $grey-300;
 
     a {
-      color: $accent-200;
+      color: $secondary-dark;
 
       .fa {
         margin-left: $SPACE;

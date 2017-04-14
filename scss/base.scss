@@ -14,7 +14,7 @@ $font-size-small: 27px;
 }
 
 #header {
-  background-color: $primary-500;
+  background-color: $primary;
 
   height: $total-height;
   width: 100%;
@@ -27,7 +27,7 @@ $font-size-small: 27px;
     height: $top-bar-height;
     width: 100%;
 
-    background: $primary-700;
+    background: $primary-dark;
 
     /* hack to fix centering issues */
     padding-right: 300px;
@@ -109,7 +109,7 @@ $chips-size: 64px;
 $nav-space: 17px;
 
 #side-nav {
-  background-color: $primary-500;
+  background-color: $white;
   position: fixed;
 
   margin: 0;
@@ -139,7 +139,7 @@ $nav-space: 17px;
     margin: -$chips-size / 2 auto 0 auto;
 
     border-radius: $chips-size / 2;
-    background: $accent-200;
+    background: $secondary;
     width: $chips-size * 3;
 
     display: flex;
@@ -153,7 +153,7 @@ $nav-space: 17px;
 
       font-size: 26px;
       text-decoration: none;
-      @extend .font-white-primary;
+      color: $secondary-dark;
 
       display: flex;
       flex-direction: column;
@@ -177,7 +177,8 @@ $nav-space: 17px;
     .nav-link {
       font-size: 20px;
       text-decoration: none;
-      @extend .font-white-primary;
+      color: $secondary-dark;
+      opacity: 0.87;
     }
   }
 

@@ -27,6 +27,7 @@ $grey-500: #9E9E9E;
 $white: #FAFAFA;
 
 /* actual color palette */
+/*
 $primary-100: $blue-100;
 $primary-500: $blue-500;
 $primary-700: $blue-700;
@@ -40,6 +41,20 @@ $secondary-800: $pink-800;
 $accent-100: $pinkA-100;
 $accent-200: $pinkA-200;
 $accent-400: $pinkA-400;
+*/
+
+
+/* new actual color palette */
+$primary: #7b1fa2;
+$primary-light: #ae52d4;
+$primary-dark: #4a0072;
+
+$secondary: #80deea;
+$secondary-light: #b4ffff;
+$secondary-dark: #4bacb8;
+
+$font-primary: #ffffff;
+$font-secondary: #000000;
 
 /* other constants */
 $SPACE: 16px; /* base spacing constant */
