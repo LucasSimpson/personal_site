@@ -79,6 +79,9 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
+    # gzip
+    'django.middleware.gzip.GZipMiddleware',
+
     # cors middleware
     'corsheaders.middleware.CorsMiddleware',
 
@@ -181,6 +184,7 @@ USE_TZ = True
 AWS_STORAGE_BUCKET_NAME = 'lucas-simpson-personal-site-static'
 AWS_ACCESS_KEY_ID = 'AKIAIHOL64GDXSEZWXJQ'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_IS_GZIPPED = True  # enable gzip compression
 
 # use local for dev
 if DEBUG:

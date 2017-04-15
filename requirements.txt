@@ -1,4 +1,4 @@
-appdirs==1.4.2
+appdirs==1.4.3
 base58==0.2.4
 boto==2.45.0
 boto3==1.4.1
@@ -35,13 +35,13 @@ protobuf==3.1.0.post1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
 pycryptodome==3.4.3
-pyparsing==2.1.10
+pyparsing==2.2.0
 Pyrebase==3.0.24
 python-dateutil==2.6.0
 python-jwt==2.0.1
 python-slugify==1.2.1
 PyYAML==3.12
-requests==2.11.1
+requests==2.12.3
 requests-toolbelt==0.7.0
 rsa==3.4.2
 s3transfer==0.1.9
