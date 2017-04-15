@@ -1,11 +1,8 @@
 from django.views.generic import TemplateView
 
+from funlinks import FunLink
 from klu_pythonapi.notifications import push
-
-
-# landing page
-class IndexView(TemplateView):
-    template_name = 'index/index.html'
+from workexperience import WorkExperience
 
 
 class KluView(TemplateView):
@@ -14,10 +11,38 @@ class KluView(TemplateView):
     template_name = 'index/klu.html'
 
     def get_context_data(self, **kwargs):
-        msg = kwargs.get('message', None)
+        msg = kwargs.get('message', '')
         if msg:
             push('lucassimpson.com', 'Demo Success', msg)
 
         return {
-            'message': kwargs.get('message', 'There is no message :(')
+            'message': msg
         }
+
+
+class IndexView(TemplateView):
+    """Main landing page."""
+
+    template_name = 'index/index/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['fun_links'] = FunLink.all()
+        return context
+
+
+class WorkExperienceView(TemplateView):
+    """Work experience page."""
+
+    template_name = 'index/work_experience/work_experience.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(WorkExperienceView, self).get_context_data(**kwargs)
+        context['work_experiences'] = WorkExperience.all()
+        return context
+
+
+class AboutView(TemplateView):
+    """About me/site page."""
+
+    template_name = 'index/about/about.html'

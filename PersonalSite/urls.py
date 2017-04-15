@@ -18,5 +18,4 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^', include('index.urls', namespace='index')),
     url(r'^api/v1/', include('api.urls', namespace='api')),
-    url(r'^alt/', include('alt.urls', namespace='alt')),
 ]

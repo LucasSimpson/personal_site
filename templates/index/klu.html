@@ -6,6 +6,10 @@
 </head>
 <body>
     <p>This is merely a demo page. Also, I'm trusting you not to abuse this.</p>
-    <p>Message sent: {{ message }}</p>
+    {% if msg %}
+        <p>Message sent: {{ message }}</p>
+    {% else %}
+        <p>No message! try going to <a href="{% url 'index:klu' 'your%20message%20here' %}">/klu/your message here</a></p>
+    {% endif %}
 </body>
 </html>
