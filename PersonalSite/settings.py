@@ -80,7 +80,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # gzip
-    'django.middleware.gzip.GZipMiddleware',
+    #'django.middleware.gzip.GZipMiddleware',
 
     # cors middleware
     'corsheaders.middleware.CorsMiddleware',
