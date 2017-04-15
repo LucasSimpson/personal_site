@@ -20,3 +20,7 @@ class WorkExperienceView(TemplateView):
         context = super(WorkExperienceView, self).get_context_data(**kwargs)
         context['work_experiences'] = WorkExperience.all()
         return context
+
+
+class AboutView(TemplateView):
+    template_name = 'alt/about/about.html'

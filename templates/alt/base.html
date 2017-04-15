@@ -31,15 +31,21 @@
         </div>
 
         <div id="icon-links" class="shadow">
-            <a id="first" class="icon-link text-center" href="https://github.com/LucasSimpson"></a>
-            <a id="second" class="icon-link text-center" href="https://www.linkedin.com/in/lucas-simpson"></a>
-            <a id="third" class="icon-link text-center" href="#"></a>
+            <a id="first" class="icon-link text-center" href="https://github.com/LucasSimpson">
+                <img src="{% static 'images/GitHub-Mark-Light-64px.png' %}">
+            </a>
+            <a id="second" class="icon-link text-center" href="https://www.linkedin.com/in/lucas-simpson">
+                <img src="{% static 'images/In-White-34px.png' %}">
+            </a>
+            <a id="third" class="icon-link text-center" href="#">
+                <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+            </a>
         </div>
 
         <ul id="nav-links">
             <li><a class="nav-link" href="{% url 'alt:index' %}">Home</a></li>
             <li><a class="nav-link" href="{% url 'alt:work_experience' %}">Work Experience</a></li>
-            <li><a class="nav-link" href="{% url 'alt:index' %}">Logs</a></li>
+            <li><a class="nav-link" href="{% url 'alt:about' %}">About</a></li>
         </ul>
 
         <footer>
@@ -53,19 +59,22 @@
         <!-- Lucas Simpson header part -->
         <div id="header" class="shadow">
             <div id="top-bar"></div>
-                <h1>Lucas Simpson</h1>
+
+            <h1>Lucas Simpson</h1>
+
             <div id="nav-toggle">
                 <img id="burger-icon" src="{% static 'images/burger.png' %}">
             </div>
+
+            <div id="bottom-bar"></div>
         </div>
 
         <!-- spacer for mobile wooot -->
         <div id="header-spacer"></div>
 
         <!-- actual content -->
-        <div class="shadow">
             {% block content %}{% endblock %}
-        </div>
+
 
     </div>
 </body>

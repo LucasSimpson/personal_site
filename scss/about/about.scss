@@ -1,0 +1,24 @@
+@import '../global';
+
+#about {
+  background: $white;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 $SPACE;
+
+  text-align: center;
+
+  @media (min-width: 992px) {
+    #mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: 992px) {
+    #non-mobile {
+      display: none;
+    }
+  }
+}

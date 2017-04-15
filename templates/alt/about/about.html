@@ -1,0 +1,32 @@
+{% extends 'alt/base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+    <link href="{% static 'css/about/about.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div id="about">
+        <h1>Who is this guy?</h1>
+
+        <br>
+
+        <div id="mobile">
+            <p>This guy right here.</p>
+            <img src="{% static 'images/me.jpeg' %}">
+            <br><br>
+        </div>
+        <div id="non-mobile">
+            <p>I mean, you know my name because its on the top of every page, and you know what I look like because its right there on the left.</p>
+        </div>
+        <p>This site is a my pet project. I use it to demonstrate my abilities as a web dev, to try out cool new shiny
+            web dev things, but I use it mostly for the list of fun links I've bookmarked (they're on the home page).
+            The links include cool blogs I enjoy reading, useful deposits of information on various topics, and fun
+            stories and ideas that I enjoyed finding out about!
+            I'm currently a 4th year computer engineering student at McMaster Engineering, in Hamilton ON.
+            Starting in August, I'll be working for Amazon in Seattle, WA.</p>
+        <p>I enjoy software development, drumming, climbing, volleyball, psychology, and lounging around!</p>
+    </div>
+
+{% endblock %}

@@ -1,10 +1,10 @@
 @import 'global';
 
 $top-bar-height: 8px;
-$total-height: 80px;
+$total-height: 88px;
 $font-size: 36px;
 
-$total-height-small: 60px;
+$total-height-small: 68px;
 $font-size-small: 27px;
 
 @media (max-width: 992px) {
@@ -33,11 +33,20 @@ $font-size-small: 27px;
     padding-right: 300px;
   }
 
+  #bottom-bar {
+    height: $top-bar-height;
+    width: 100%;
+
+    background: $primary-light;
+
+    margin-top: -3px; // font size is -3px from actual rendering size
+  }
+
   h1 {
     @extend .font-white-primary;
     flex: 1 1 auto;
     padding: 0;
-    margin: (($total-height - $top-bar-height - $font-size) / 2) 0 0 0;
+    margin: (($total-height - 2*$top-bar-height - $font-size) / 2) 0;
 
     font-size: $font-size;
     text-align: center;
@@ -87,26 +96,32 @@ $font-size-small: 27px;
     h1 {
       font-size: $font-size-small;
       text-align: left;
-      margin: (($total-height-small - $top-bar-height - $font-size-small) / 2) 0 0 $SPACE;
+      margin: (($total-height-small - 2*$top-bar-height - $font-size-small) / 2) 0 0 $SPACE;
     }
 
     #nav-toggle {
       font-size: $font-size-small;
 
-      top: ($total-height-small - $top-bar-height - $font-size-small) / 2 + $top-bar-height;
+      top: ($total-height-small - 2*$top-bar-height - $font-size-small) / 2 + $top-bar-height;
       right: ($total-height-small - $top-bar-height - $font-size-small) / 2;
     }
-  }
 
-  #header-spacer {
-    height: $total-height-small;
+    #header-spacer {
+      height: $total-height-small;
+    }
+
+    #bottom-bar {
+      margin-top: 10px;
+    }
   }
 }
 
 
+
+
 // side nav stuff
 $chips-size: 64px;
-$nav-space: 17px;
+$nav-space: 32px;
 
 #side-nav {
   background-color: $white;
@@ -139,7 +154,7 @@ $nav-space: 17px;
     margin: -$chips-size / 2 auto 0 auto;
 
     border-radius: $chips-size / 2;
-    background: $secondary;
+    background: $primary;
     width: $chips-size * 3;
 
     display: flex;
@@ -159,6 +174,17 @@ $nav-space: 17px;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    /* third icon uses glyphicon as a font */
+    #third {
+      color: #FFF;
+      font-size: 32px;
     }
   }
 
@@ -199,7 +225,7 @@ $nav-space: 17px;
     width: 100%;
     height: auto;
 
-    margin-top: 70px;
+    margin-top: $total-height;
 
     #beautiful-me {
       display: none;
