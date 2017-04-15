@@ -80,6 +80,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # gzip
+    # API gateway currently does not support HTTP compression. It is on the roadmap
+    # for now this remains commented out. All static files are gzipped anyway.
     #'django.middleware.gzip.GZipMiddleware',
 
     # cors middleware
