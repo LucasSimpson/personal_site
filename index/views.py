@@ -1,4 +1,6 @@
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 
 from funlinks import FunLink
 from klu_pythonapi.notifications import push
@@ -46,3 +48,10 @@ class AboutView(TemplateView):
     """About me/site page."""
 
     template_name = 'index/about/about.html'
+
+
+class ResumeRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        return static('resume.pdf')
