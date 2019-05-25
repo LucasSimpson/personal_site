@@ -1,1 +1,1 @@
-from dynamomodels import Interests
+from .dynamomodels import Interests

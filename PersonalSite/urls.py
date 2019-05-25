@@ -16,6 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^', include('index.urls', namespace='index')),
-    url(r'^api/v1/', include('api.urls', namespace='api')),
+    url(r'^', include(('index.urls', 'index'), namespace='index')),
+    url(r'^api/v1/', include(('api.urls', 'api'), namespace='api')),
 ]

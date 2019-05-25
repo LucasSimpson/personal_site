@@ -1,7 +1,7 @@
 import logging
 
-from fields import HashNestedKey, RangeNestedKey, ModelField
-from manager import DynamoDBManager
+from .fields import HashNestedKey, RangeNestedKey, ModelField
+from .manager import DynamoDBManager
 from .exceptions import ItemNotFoundException
 from .queryset import QuerySet
 

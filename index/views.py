@@ -40,7 +40,7 @@ class WorkExperienceView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(WorkExperienceView, self).get_context_data(**kwargs)
-        context['work_experiences'] = WorkExperience.all()
+        context['work_experiences'] = sorted(WorkExperience.all(), key=lambda we: -we.chrono_order)
         return context
 
 

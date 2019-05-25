@@ -1,1 +1,1 @@
-from dynamomodels import WorkExperience
+from .dynamomodels import WorkExperience

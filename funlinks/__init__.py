@@ -1,1 +1,1 @@
-from dynamomodels import FunLink
+from .dynamomodels import FunLink

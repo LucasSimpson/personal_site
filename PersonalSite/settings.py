@@ -18,12 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Nice try :)
 try:
-    import secret_settings
-    SECRET_KEY = secret_settings.SECRET_KEY
-    AWS_SECRET_ACCESS_KEY = secret_settings.AWS_SECRET_ACCESS_KEY
-    DYNAMO_ACCESS_KEY = secret_settings.DYNAMO_ACCESS_KEY
-    DYNAMO_SECRET_ACCESS_KEY = secret_settings.DYNAMO_SECRET_ACCESS_KEY
-    AUTH_TOKEN = secret_settings.AUTH_TOKEN
+    from PersonalSite.secret_settings import *
 
 except ImportError:
     SECRET_KEY = os.environ.get('SECRET_KEY', None)
@@ -45,11 +40,8 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
-    'django.contrib.auth', # uncommented so rest_framework works
-    'django.contrib.contenttypes', # uncommented so rest_framework works
-    # 'django.contrib.sessions',
-    # 'django.contrib.messages',
+    'django.contrib.auth',  # uncommented so rest_framework works
+    'django.contrib.contenttypes',  # uncommented so rest_framework works
     'django.contrib.staticfiles',
 
     # main app
@@ -82,17 +74,13 @@ MIDDLEWARE = [
     # gzip
     # API gateway currently does not support HTTP compression. It is on the roadmap
     # for now this remains commented out. All static files are gzipped anyway.
-    #'django.middleware.gzip.GZipMiddleware',
+    # 'django.middleware.gzip.GZipMiddleware',
 
     # cors middleware
     'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
-    # 'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -226,11 +214,4 @@ REST_FRAMEWORK = {
 
 # cors. No way to whitelist chrome extension, so here we are
 CORS_ORIGIN_ALLOW_ALL = True
-"""
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
-    'localhose:8000',
-    '82jfdcutig.execute-api.us-east-1.amazonaws.com',
-)
-"""
 
