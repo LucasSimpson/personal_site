@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     # main app
     'index',
 
+    # blog
+    'blog',
+
     # API
     'api',
 

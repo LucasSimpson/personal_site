@@ -1,0 +1,28 @@
+
+#blog-container {
+
+    margin: auto;
+    padding: 0 26px;
+
+    max-width: 900px;
+
+
+    #archive-link {
+        margin-top: 64px;
+    }
+
+    #post-title {
+        margin-top: 8px;
+    }
+
+    #post-date {
+        margin-top: -12px;
+        margin-bottom: 28px;
+        color: grey;
+    }
+
+    #blog-post {
+        margin-top: 12px;
+
+    }
+}

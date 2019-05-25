@@ -1,0 +1,11 @@
+{% extends 'blog/blog_base.html' %}
+
+{% block title %}
+    All Post
+{% endblock %}
+
+{% block post %}
+    <div id="blog-list">
+        <p><a href="{% url 'blog:social_arguer' %}">May 28, 2019 - Social Arguer</a></p>
+    </div>
+{% endblock %}

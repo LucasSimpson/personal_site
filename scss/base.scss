@@ -1,8 +1,8 @@
 @import 'global';
 
-$top-bar-height: 8px;
-$total-height: 88px;
-$font-size: 36px;
+$top-bar-height: 5px;
+$total-height: 54px;
+$font-size: 28px;
 
 $total-height-small: 68px;
 $font-size-small: 27px;
@@ -11,12 +11,13 @@ $font-size-small: 27px;
   #top-bar {
     padding-right: 0;
   }
+
 }
 
 #header {
   background-color: $primary;
 
-  height: $total-height;
+  height: $total-height - 1px;
   width: 100%;
 
   position: fixed;
@@ -263,9 +264,12 @@ $nav-space: 32px;
 }
 
 #scroll-content {
+  background: #FAFAFA;
+
   padding-left: 300px;
   width: 100%;
   height: 100%;
+  min-height: 100vh;
 
   z-index: 0;
 }
