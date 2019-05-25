@@ -1,8 +1,9 @@
 from django.conf.urls import url
+from django.urls import path
 
-from .views import PostsListsView, SocialArguerView
+from .views import PostsListsView, PostDetailView
 
 urlpatterns = [
     url(r'^$', PostsListsView.as_view(), name='posts-list'),
-    url(r'^2019-05-28/social_arguer/$', SocialArguerView.as_view(), name='social_arguer'),
+    path('<slug:date>/<slug:title>/', PostDetailView.as_view(), name='post-detail'),
 ]

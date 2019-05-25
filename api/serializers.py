@@ -69,7 +69,9 @@ class BlogPostSerializer(LucasAuthenticationSerializer):
     id = serializers.IntegerField(read_only=True)
     date_created = serializers.DateTimeField(read_only=True)
     last_modified = serializers.DateTimeField(read_only=True)
+    url_title = serializers.CharField()
     title = serializers.CharField()
+
     content = serializers.CharField()
 
     def create(self, validated_data):
