@@ -1,5 +1,7 @@
+from django.utils import timezone
 from rest_framework import serializers
 
+from blog import BlogPost
 from workexperience.dynamomodels import WorkExperience
 from funlinks.dynamomodels import FunLink
 from interests.dynamomodels import Interests
@@ -62,3 +64,21 @@ class InterestsSerializer(LucasAuthenticationSerializer):
         instance.update(**validated_data)
         return instance
 
+
+class BlogPostSerializer(LucasAuthenticationSerializer):
+    id = serializers.IntegerField(read_only=True)
+    date_created = serializers.DateTimeField(read_only=True)
+    last_modified = serializers.DateTimeField(read_only=True)
+    title = serializers.CharField()
+    content = serializers.CharField()
+
+    def create(self, validated_data):
+        blog_post = BlogPost()
+        blog_post.date_created = timezone.now()
+        blog_post.bind(**validated_data)
+        blog_post.save()
+        return blog_post
+
+    def update(self, instance, validated_data):
+        instance.update(**validated_data)
+        return instance

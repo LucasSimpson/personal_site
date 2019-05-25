@@ -2,6 +2,9 @@
 
 # fields hold no value. they are there purely for description, validation,
 # and as an adapter between db storage and python rep
+from datetime import datetime
+
+
 class ModelField(object):
 
     # proto is a string representing dynamoBD storage type, ex 'S'/'N'/'B'
@@ -89,6 +92,23 @@ class CharField(ModelField):
         return str(value)
 
 
+# generic field for holding a datetime
+class DateTimeField(ModelField):
+    proto = 'S'
+
+    def encoded(self, value: datetime):
+        if value is None:
+            return None
+
+        # this gives a colon in the timezone offsete e.g. "+00:00". We don't want that, so just remove it
+        date_string = value.isoformat()
+        date_string = date_string[:-3] + date_string[-2:]
+        return date_string
+
+    def decoded(self, value: str) -> datetime:
+        return datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f%z") if value is not None else None
+
+
 # number field that auto increments for each new item
 # TODO performance issues aside, theres a bunch of concurrency issues here :( yaaayyy mvp
 class AutoIncrementingField(NumberField):
@@ -105,5 +125,5 @@ class AutoIncrementingField(NumberField):
             if id > high:
                 high = id
 
-        # return highest+1
-        return high+1
+        # return highest + 1
+        return high + 1

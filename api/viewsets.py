@@ -1,11 +1,12 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from blog import BlogPost
 from funlinks.dynamomodels import FunLink
 from workexperience.dynamomodels import WorkExperience
 from interests.dynamomodels import Interests
 
-from .serializers import WorkExperienceSerializer, FunLinkSerializer, InterestsSerializer
+from .serializers import WorkExperienceSerializer, FunLinkSerializer, InterestsSerializer, BlogPostSerializer
 
 
 class WorkExperienceViewSet(ModelViewSet):
@@ -37,5 +38,16 @@ class InterestsViewSet(ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-        serialzer = self.get_serializer(instance)
-        return Response(serialzer.data)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+class BlogPostsViewSet(ModelViewSet):
+    queryset = BlogPost.all()
+    serializer_class = BlogPostSerializer
+    lookup_field = 'id'
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
