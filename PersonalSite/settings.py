@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sitemaps',
     'django.contrib.auth',  # uncommented so rest_framework works
     'django.contrib.contenttypes',  # uncommented so rest_framework works
     'django.contrib.staticfiles',
