@@ -1,17 +1,26 @@
 from django.contrib.sitemaps import Sitemap
-from django.urls import reverse
+
+from blog import BlogPost
 
 
-class BlogSitemap(Sitemap):
-    # https://docs.djangoproject.com/en/2.2/ref/contrib/sitemaps/
+class BlogListSitemap(Sitemap):
     changefreq = "monthly"
+    priority = 0.4
+
+    def items(self):
+        return []
+
+
+class BlogPostsSitemap(Sitemap):
+    # https://docs.djangoproject.com/en/2.2/ref/contrib/sitemaps/
+    changefreq = "yearly"
     priority = 1.0
 
     def items(self):
-        return [
-            'posts-list',
-            'social_arguer',
-        ]
+        return BlogPost.all()
 
-    def location(self, view_name):
-        return reverse(f'blog:{view_name}')
+    def location(self, blog_post):
+        return blog_post.get_absolute_url()
+
+    def lastmod(self, blog_post):
+        return blog_post.last_modified

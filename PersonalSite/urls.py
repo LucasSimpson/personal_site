@@ -17,11 +17,12 @@ from django.conf.urls import url, include
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 
-from blog.sitemap import BlogSitemap
+from blog.sitemap import BlogListSitemap, BlogPostsSitemap
 from index.sitemap import IndexSitemap
 
 sitemaps = {
-    'blog': BlogSitemap,
+    'blog_archive': BlogListSitemap,
+    'blog_posts': BlogPostsSitemap,
     'index': IndexSitemap,
 }
 

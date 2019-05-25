@@ -1,3 +1,5 @@
+from django.urls import reverse
+
 from django_dynamodb import BaseModel, fields, register_dynamodb_model
 from django.utils import timezone
 
@@ -21,8 +23,10 @@ class BlogPost(BaseModel):
     def get_url_date(self):
         return f'{self.date_created.year}-{self.date_created.month}-{self.date_created.day}'
 
-    def content_as_html(self):
+    def get_absolute_url(self):
+        return reverse('blog:post-detail', kwargs={'title': self.get_url_title(), 'date': self.get_url_date()})
 
+    def content_as_html(self):
         def parse_for_italics(text):
             result = ''
             words = text.split(' ')
