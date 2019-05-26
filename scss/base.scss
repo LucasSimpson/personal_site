@@ -4,7 +4,7 @@ $top-bar-height: 5px;
 $total-height: 54px;
 $font-size: 28px;
 
-$total-height-small: 68px;
+$total-height-small: 65px;
 $font-size-small: 27px;
 
 @media (max-width: 992px) {
@@ -25,10 +25,10 @@ $font-size-small: 27px;
   top: 0;
 
   #top-bar {
-    height: $top-bar-height;
+    height: 0;
     width: 100%;
 
-    background: $primary-dark;
+    background: $primary;
 
     /* hack to fix centering issues */
     padding-right: 300px;
@@ -47,7 +47,7 @@ $font-size-small: 27px;
     @extend .font-white-primary;
     flex: 1 1 auto;
     padding: 0;
-    margin: (($total-height - 2*$top-bar-height - $font-size) / 2) 0;
+    margin: (($total-height - $top-bar-height - $font-size) / 2) 0;
 
     font-size: $font-size;
     text-align: center;
@@ -92,18 +92,18 @@ $font-size-small: 27px;
 
 @media (max-width: 576px) {
   #header {
-    height: $total-height-small;
+    height: $total-height-small - 4px;
 
     h1 {
       font-size: $font-size-small;
       text-align: left;
-      margin: (($total-height-small - 2*$top-bar-height - $font-size-small) / 2) 0 0 $SPACE;
+      margin: (($total-height-small - $top-bar-height - $font-size-small) / 2) 0 0 $SPACE;
     }
 
     #nav-toggle {
       font-size: $font-size-small;
 
-      top: ($total-height-small - 2*$top-bar-height - $font-size-small) / 2 + $top-bar-height;
+      top: ($total-height-small - $top-bar-height - $font-size-small) / 2 + $top-bar-height;
       right: ($total-height-small - $top-bar-height - $font-size-small) / 2;
     }
 
@@ -121,11 +121,11 @@ $font-size-small: 27px;
 
 
 // side nav stuff
-$chips-size: 64px;
+$chips-size: 48px;
 $nav-space: 32px;
 
 #side-nav {
-  background-color: $white;
+  background-color: $background-color;
   position: fixed;
 
   margin: 0;
@@ -204,8 +204,14 @@ $nav-space: 32px;
     .nav-link {
       font-size: 20px;
       text-decoration: none;
-      color: $secondary-dark;
+      color: $primary-dark;
       opacity: 0.87;
+    }
+  }
+
+  @media (max-width: 992px) {
+    #nav-links {
+      text-align: center;
     }
   }
 
@@ -264,7 +270,7 @@ $nav-space: 32px;
 }
 
 #scroll-content {
-  background: #FAFAFA;
+  background: $background-color;
 
   padding-left: 300px;
   width: 100%;

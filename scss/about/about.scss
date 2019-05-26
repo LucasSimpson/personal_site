@@ -1,7 +1,7 @@
-@import '../global';
+@import '../global.scss';
 
 #about {
-  background: $white;
+  background: $background-color;
 
   display: flex;
   flex-direction: column;

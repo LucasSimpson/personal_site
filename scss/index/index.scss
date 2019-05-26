@@ -1,16 +1,12 @@
-@import '../global';
+@import '../global.scss';
 
 #home {
-  background: $white;
+  background: $background-color;
 
   display: flex;
   flex-direction: column;
 
   padding: 0 $SPACE;
-
-  a {
-    color: $secondary-dark;
-  }
 }
 
 #fun-links {
@@ -44,8 +40,6 @@
     border-color: $grey-300;
 
     a {
-      color: $secondary-dark;
-
       .fa {
         margin-left: $SPACE;
       }

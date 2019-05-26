@@ -1,4 +1,4 @@
-@import '../global';
+@import '../global.scss';
 
 $card-width: 300px;
 $card-font-size: 14px;
@@ -13,7 +13,7 @@ $card-font-size: 14px;
   overflow-x: auto;
   box-sizing: border-box; /* removes horizontal scrollbar */
 
-  background: $white;
+  background: $background-color;
 }
 
 /*general for each card */
@@ -107,7 +107,7 @@ $card-font-size: 14px;
 }
 
 #work-experience-title {
-  background: $white;
+  background: $background-color;
   padding: $SPACE;
 
   #resume-link {

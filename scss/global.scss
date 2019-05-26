@@ -45,16 +45,35 @@ $accent-400: $pinkA-400;
 
 
 /* new actual color palette */
-$primary: #7b1fa2;
-$primary-light: #ae52d4;
-$primary-dark: #4a0072;
 
-$secondary: #00bcd4;
-$secondary-light: #62efff;
-$secondary-dark: #008ba3;
+$purple-light: #ae52d4;
+$purple: #7b1fa2;
+$purple-dark: #4a0072;
+
+$green-light: #AAFFAA;
+$green: #77dd77;
+$green-dark: #44AA44;
+
+$dark-blue-light: #62efff;
+$dark-blue: #00bcd4;
+$dark-blue-dark: #008ba3;
+
+$blue-light: #A1E8FF;
+$blue: #87CEFA;
+$blue-dark: #216894;
+
+$primary-light: $blue-light;
+$primary: $blue;
+$primary-dark: $blue-dark;
+
+$secondary-light: $dark-blue-light;
+$secondary: $dark-blue;
+$secondary-dark: $dark-blue-dark;
 
 $font-primary: #ffffff;
 $font-secondary: #000000;
+
+$background-color: #FAFAFA;
 
 /* bootstrap copy overs */
 html {
@@ -110,7 +129,7 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 200;
   line-height: 1.1;
   color: inherit;
 }
@@ -122,6 +141,14 @@ $NAVSIZE: 300px;
 
 h1, h2, h3, h4, h5, h6, p, li {
   @extend .font-primary;
+}
+
+p, li {
+  font-size: 16px;
+}
+
+a {
+  color: $blue-dark;
 }
 
 .text-center {
