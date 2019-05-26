@@ -4,6 +4,7 @@
         "s3_bucket": "zappa-21u2df0br",
         "domain": "lucassimpson.com",
         "lets_encrypt_key": "account.key",
-        "profile_name": "zappa-personal-site"
+        "profile_name": "zappa-personal-site",
+        "cloudwatch_log_level": "INFO"
     }
 }
