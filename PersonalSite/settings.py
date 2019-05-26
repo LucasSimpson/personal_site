@@ -33,6 +33,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
+    'lucassimpson.com',
     '82jfdcutig.execute-api.us-east-1.amazonaws.com',
 ]
 
