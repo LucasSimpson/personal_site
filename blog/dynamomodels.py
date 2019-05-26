@@ -21,7 +21,15 @@ class BlogPost(BaseModel):
         return self.url_title
 
     def get_url_date(self):
-        return f'{self.date_created.year}-{self.date_created.month}-{self.date_created.day}'
+        m = str(self.date_created.month)
+        if len(m) == 1:
+            m = f'0{m}'
+
+        d = str(self.date_created.day)
+        if len(d) == 1:
+            d = f'0{d}'
+
+        return f'{self.date_created.year}-{m}-{d}'
 
     def get_absolute_url(self):
         return reverse('blog:post-detail', kwargs={'title': self.get_url_title(), 'date': self.get_url_date()})
