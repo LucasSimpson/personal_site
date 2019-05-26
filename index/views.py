@@ -55,3 +55,10 @@ class ResumeRedirectView(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         return static('resume.pdf')
+
+
+class RobotsRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        return static('robots.txt')
