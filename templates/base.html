@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Get out my source 😒😒 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,15 +12,11 @@
     <!-- favicon -->
     <link rel="icon" href="{% static 'favicons/favicon-32x32.png' %}?v=2" sizes="32x32" type="image/png">
 
-    <!-- bootstrap -->
-    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
-
     <!-- base css -->
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
 
     <!-- page specific css -->
     {% block style %}{% endblock %}
-
 </head>
 
 <body>
@@ -79,13 +76,10 @@
     </div>
 </body>
 
-<!-- js -->
+<!-- vanilla js -->
 <script>
-    // $(document).ready
     document.addEventListener("DOMContentLoaded", function() {
-
         console.log("Hello!! :D");
-
         document.getElementById('burger-icon').addEventListener('click', function() {
             var side_nav = document.getElementById('side-nav');
 

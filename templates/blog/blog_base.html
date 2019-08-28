@@ -8,7 +8,7 @@
 {% block content %}
     <div id="blog-container">
 
-        <p id="archive-link"><a href="{% url 'blog:posts-list' %}"><< Archive</a></p>
+        {% block archive  %}{% endblock %}
 
         <h1 id="post-title">{% block title %}{% endblock %}</h1>
 

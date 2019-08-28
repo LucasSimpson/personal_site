@@ -7,7 +7,7 @@
 {% block post %}
     <div id="blog-list">
         {% for post in posts %}
-            <p><a href="{{ post.get_absolute_url }}">
+            <p>{{ post.date_string }} - <a href="{{ post.get_absolute_url }}">
                 {{ post.title }}
             </a></p>
         {% endfor %}

@@ -1,5 +1,9 @@
 {% extends 'blog/blog_base.html' %}
 
+{% block archive  %}
+    <p id="archive-link"><a href="{% url 'blog:posts-list' %}"><< Archive</a></p>
+{% endblock %}
+
 {% block title %}
     {{ post.title }}
 {% endblock %}

@@ -8,7 +8,7 @@ class PostsListsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         return {
-            'posts': BlogPost.all()
+            'posts': sorted(BlogPost.all(), key=lambda bp: -bp.date_created.timestamp())
         }
 
 

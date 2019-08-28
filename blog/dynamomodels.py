@@ -1,7 +1,25 @@
 from django.urls import reverse
 
+import re
 from django_dynamodb import BaseModel, fields, register_dynamodb_model
 from django.utils import timezone
+
+
+def create_formatter(deliminator, html_tag):
+    def replace(match):
+        og = match.group(0)
+        t1 = og[0]
+        tn = og[-1]
+        return f'{t1}<{html_tag}>{og[2:-2]}</{html_tag}>{tn}'
+
+    def formatter(text):
+        return re.sub(r'[^a-zA-Z0-9]' + deliminator + r'[^.]+?' + deliminator + r'[^a-zA-Z0-9]', replace, text)
+
+    return formatter
+
+
+italics = create_formatter(r'_', 'i')
+bold = create_formatter(r'\*', 'b')
 
 
 @register_dynamodb_model
@@ -16,6 +34,9 @@ class BlogPost(BaseModel):
     def save(self):
         self.last_modified = timezone.now()
         return super().save()
+
+    def date_string(self):
+        return self.date_created.strftime("%b %d %Y")
 
     def get_url_title(self):
         return self.url_title
@@ -35,26 +56,9 @@ class BlogPost(BaseModel):
         return reverse('blog:post-detail', kwargs={'title': self.get_url_title(), 'date': self.get_url_date()})
 
     def content_as_html(self):
-        def parse_for_italics(text):
-            result = ''
-            words = text.split(' ')
-
-            for w in words:
-                if len(w) > 2 and w[0] == '_' and w[-1] == '_':
-                    nested = parse_for_italics(w[1:-1])
-                    result += f' <i>{nested}</i>'
-                else:
-                    result += f' {w}'
-
-            return result
-
-        content = self.content
-        paragraphs = content.split('  ')
-
+        paragraphs = self.content.split('  ')
         html = ''
-
         for para in paragraphs:
-            formatted = parse_for_italics(para)
-            html += f'<p>{formatted}</p>'
+            html += f'<p>{para}</p>'
 
-        return html
+        return bold(italics(html))
