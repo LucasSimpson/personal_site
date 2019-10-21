@@ -1,25 +1,8 @@
 from django.urls import reverse
-
-import re
-from django_dynamodb import BaseModel, fields, register_dynamodb_model
 from django.utils import timezone
 
-
-def create_formatter(deliminator, html_tag):
-    def replace(match):
-        og = match.group(0)
-        t1 = og[0]
-        tn = og[-1]
-        return f'{t1}<{html_tag}>{og[2:-2]}</{html_tag}>{tn}'
-
-    def formatter(text):
-        return re.sub(r'[^a-zA-Z0-9]' + deliminator + r'[^.]+?' + deliminator + r'[^a-zA-Z0-9]', replace, text)
-
-    return formatter
-
-
-italics = create_formatter(r'_', 'i')
-bold = create_formatter(r'\*', 'b')
+from blog.formatting.formatters import ToParagraphs, ToItalics, ToBold, Linkify
+from django_dynamodb import BaseModel, fields, register_dynamodb_model
 
 
 @register_dynamodb_model
@@ -56,9 +39,15 @@ class BlogPost(BaseModel):
         return reverse('blog:post-detail', kwargs={'title': self.get_url_title(), 'date': self.get_url_date()})
 
     def content_as_html(self):
-        paragraphs = self.content.split('  ')
-        html = ''
-        for para in paragraphs:
-            html += f'<p>{para}</p>'
+        formatters = [
+            ToParagraphs(),
+            ToItalics(),
+            ToBold(),
+            Linkify(),
+        ]
 
-        return bold(italics(html))
+        html = self.content
+        for formatter in formatters:
+            html = formatter.format(html)
+
+        return html
