@@ -1,15 +1,17 @@
-{% extends 'blog/blog_base.html' %}
+{% extends "base.html" %}
 
-{% block title %}
-    All Post
-{% endblock %}
 
-{% block post %}
-    <div id="blog-list">
-        {% for post in posts %}
-            <p>{{ post.date_string }} - <a href="{{ post.get_absolute_url }}">
-                {{ post.title }}
-            </a></p>
-        {% endfor %}
+{% block content %}
+    <div id="blog-container">
+        <h1 id="post-title">All Posts</h1>
+
+        <div id="blog-post">
+            {% for post in posts %}
+                <p>{{ post.date_string }} - <a href="{{ post.get_absolute_url }}">
+                    {{ post.title }}
+                </a></p>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
+

@@ -5,8 +5,6 @@
     margin: 64px auto;
     padding: 0 26px;
 
-    max-width: 900px;
-
     #post-title {
         margin-top: 8px;
     }
@@ -14,11 +12,10 @@
     #post-date {
         margin-top: -12px;
         margin-bottom: 28px;
-        color: grey;
+        @extend .font-white-secondary;
     }
 
     #blog-post {
         margin-top: 12px;
-
     }
 }

@@ -1,6 +1,3 @@
-{% extends 'base.html' %}
-{% load staticfiles %}
-
 <div id="blog-container">
     {% if show_archive %}
         <p id="archive-link"><a href="{% url 'blog:posts-list' %}"><< Archive</a></p>
@@ -12,4 +9,3 @@
 
     <div id="blog-post">{{ post.content_as_html | safe }}</div>
 </div>
-

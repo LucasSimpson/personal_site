@@ -13,7 +13,7 @@ class PostsListsView(TemplateView):
 
 
 class PostDetailView(TemplateView):
-    template_name = 'blog/posts_detail.html'
+    template_name = 'blog/post_detail.html'
 
     def get_context_data(self, **kwargs):
         title = kwargs.get('title', None)

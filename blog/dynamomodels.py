@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.utils import timezone
 
-from blog.formatting.formatters import ToParagraphs, ToItalics, ToBold, Linkify
+from blog.formatting.formatters import ToParagraphs, ToItalics, ToBold, Linkify, Formatter
 from django_dynamodb import BaseModel, fields, register_dynamodb_model
 
 
@@ -39,15 +39,21 @@ class BlogPost(BaseModel):
         return reverse('blog:post-detail', kwargs={'title': self.get_url_title(), 'date': self.get_url_date()})
 
     def content_as_html(self):
-        formatters = [
+        formatter = Formatter.chain([
             ToParagraphs(),
             ToItalics(),
             ToBold(),
             Linkify(),
-        ]
+        ])
 
-        html = self.content
-        for formatter in formatters:
-            html = formatter.format(html)
+        return formatter.format(self.content)
 
-        return html
+    def preview_as_html(self):
+        formatter = Formatter.chain([
+            ToParagraphs(2),
+            ToItalics(),
+            ToBold(),
+            Linkify(),
+        ])
+
+        return formatter.format(self.content) + f'<p><a href="{self.get_absolute_url()}">Continue reading</a></p>'

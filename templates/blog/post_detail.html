@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include "blog/post_fragment.html" with post=post show_archive="True" only %}
+{% endblock %}

@@ -15,3 +15,5 @@ do
     sass --style compressed --watch $SOURCE_DIR/$file:$OUTPUT_DIR/$filename.css &
     echo $OUTPUT_DIR/$filename.css
 done
+
+wait

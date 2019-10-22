@@ -5,41 +5,28 @@
     <link href="{% static 'css/index/index.css' %}" rel="stylesheet">
 {% endblock %}
 
-{%  block content %}
-    <div id="home">
+{% block content %}
+    {% for post in blog_posts %}
+        <div id="blog-container">
+            <h1 id="post-title">{{ post.title }}</h1>
+            <h4 id="post-date">{{ post.date_created }}</h4>
+            <div id="blog-post">{{ post.preview_as_html | safe }}</div>
+        </div>
 
-        <h1>Welcome!</h1>
-        <p>This is my personal website! The goal of this site is really just for personal reference, and to have something to play around with.</p>
+        {% include "misc/spacer.html" %}
+    {% endfor %}
 
-        <p>Some details about this site:</p>
-        <ul>
-            <li>All source code is on my <a href="https://github.com/LucasSimpson">Github</span></a>,
-                specifically <a href="https://github.com/LucasSimpson/personal_site">here</a>.</li>
-            <li>All the of the CSS is custom! I did this as a personal exercise in CSS knowledge.</li>
-            <li>I make good use of <a href="http://sass-lang.com/">Sass</a> for all the CSS.</li>
-            <li>The backend REST API is powered by <a href="https://www.djangoproject.com/">Django</a>, with the help of the <a href="http://www.django-rest-framework.org/">Django REST Framework</a>.</li>
-            <li>The backend uses <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html">DynamoDB</a> as a data source. There is no SQL database attached (I'm cheap; those things are relatively expensive to host. Go AWS free tier!).</li>
-            <li>This whole site is hosted serverlessly on <a href="http://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda</a>, and I use <a href="https://www.zappa.io/">Zappa</a> for easy deploying.</li>
-            <li>Frontend used to use Angular. I removed it because I really don't need it for this, and it was slowing
-                the whole site down. I used it initially because I wanted to learn Angular, and this was a good way to
-                learn it! The legacy frontend repo is <a href="https://github.com/LucasSimpson/personal_site_frontend">here</a>,
-                which I'm keeping around as a reference for myself. Since removing it, this whole page comes in at under 90KB.</li>
-        </ul>
+{#    <div id="fun-links">#}
+{#        <h2>Links</h2>#}
+{#        <p>The following is a collection I find useful and/or interesting. I mostly keep them here as a personal reference, but you may find some of these interesting as well.</p>#}
+{#    </div>#}
 
-        <p>Wanna get in touch? Reach me at lucassimpson05@gmail.com</p>
-    </div>
-
-    <div id="fun-links">
-        <h2>Links</h2>
-        <p>The following is a collection I find useful and/or interesting. I mostly keep them here as a personal reference, but you may find some of these interesting as well.</p>
-    </div>
-
-    <div id="links-container">
-        {% for link in fun_links %}
-            <div class="link">
-                <a href="{{ link.link }}">{{ link.title }}</a>
-            </div>
-        {% endfor %}
-    </div>
+{#    <div id="links-container">#}
+{#        {% for link in fun_links %}#}
+{#            <div class="link">#}
+{#                <a href="{{ link.link }}">{{ link.title }}</a>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
 
 {%  endblock %}

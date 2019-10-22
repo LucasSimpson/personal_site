@@ -21,9 +21,12 @@ class WorkExperienceViewSet(ModelViewSet):
 
 
 class FunLinkViewSet(ModelViewSet):
-    queryset = FunLink.all()
     serializer_class = FunLinkSerializer
     lookup_field = 'id'
+
+    def get_queryset(self):
+        links = FunLink.all()
+        return sorted(links, key=lambda link: -link.id)
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()

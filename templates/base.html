@@ -14,6 +14,7 @@
 
     <!-- base css -->
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/blog/blog.css' %}" rel="stylesheet">
 
     <!-- page specific css -->
     {% block style %}{% endblock %}
@@ -21,58 +22,65 @@
 
 <body>
 
-    <!-- side nav part -->
-    <div id="side-nav" class="shadow">
+    <!-- page container -->
+    <div id="lucas-universe">
 
-        <div id="beautiful-me">
-            <img class="image-responsive" src="{% static 'images/calvin_hobbes.jpg' %}">
-        </div>
+        <!-- side nav part -->
+        <div id="side-nav">
 
-        <div id="icon-links" class="shadow">
-            <a id="first" class="icon-link text-center" href="https://github.com/LucasSimpson">
-                <img src="{% static 'images/GitHub-Mark-Light-64px.png' %}">
-            </a>
-            <a id="second" class="icon-link text-center" href="https://www.linkedin.com/in/lucas-simpson">
-                <img src="{% static 'images/In-White-34px.png' %}">
-            </a>
-            <a id="third" class="icon-link text-center" href="#">
-                <img src="{% static 'images/globe-128.png' %}">
-            </a>
-        </div>
-
-        <ul id="nav-links">
-            <li><a class="nav-link" href="{% url 'index:index' %}">Home</a></li>
-            <li><a class="nav-link" href="{% url 'blog:posts-list' %}">Blog</a></li>
-            <li><a class="nav-link" href="{% url 'index:work_experience' %}">Work Experience</a></li>
-            <li><a class="nav-link" href="{% url 'index:about' %}">About</a></li>
-        </ul>
-
-        <footer>
-            <p id="email">lucassimpson05@gmail.com</p>
-        </footer>
-    </div>
-
-    <!-- main content -->
-    <div id="scroll-content">
-
-        <!-- Lucas Simpson header part -->
-        <div id="header">
-            <div id="top-bar"></div>
-
-            <h1>Lucas Simpson</h1>
-
-            <div id="nav-toggle">
-                <img id="burger-icon" src="{% static 'images/burger.png' %}">
+            <div id="beautiful-me">
+                <a href="/">
+                    <img class="image-responsive" src="{% static 'images/ch_explore.png' %}">
+                </a>
             </div>
 
-            <div id="bottom-bar"></div>
+{#            {% include "misc/spacer.html" %}#}
+
+            <div id="icon-links">
+                <a id="first" class="icon-link text-center" href="https://github.com/LucasSimpson">
+                    <img src="{% static 'images/GitHub-Mark-Light-64px.png' %}">
+                </a>
+                <a id="second" class="icon-link text-center" href="https://www.linkedin.com/in/lucas-simpson">
+                    <img src="{% static 'images/In-White-34px.png' %}">
+                </a>
+            </div>
+
+{#            {% include "misc/spacer.html" %}#}
+
+            <ul id="nav-links">
+                <li><a class="nav-link" href="{% url 'index:index' %}">Home</a></li>
+                <li><a class="nav-link" href="{% url 'blog:posts-list' %}">Blog</a></li>
+                <li><a class="nav-link" href="{% url 'index:about' %}">About</a></li>
+            </ul>
+
+            <footer>
+                <p id="email">lucassimpson05@gmail.com</p>
+            </footer>
         </div>
 
-        <!-- spacer for mobile wooot -->
-        <div id="header-spacer"></div>
+        <!-- main content -->
+        <div id="scroll-content">
 
-        <!-- actual content -->
-        {% block content %}{% endblock %}
+            <!-- Lucas Simpson header part -->
+            <div id="header">
+                <div id="top-bar"></div>
+
+                <h1>Lucas Simpson</h1>
+
+                <div id="nav-toggle">
+                    <img id="burger-icon" src="{% static 'images/burger.png' %}">
+                </div>
+
+                <div id="bottom-bar"></div>
+            </div>
+
+            <!-- spacer for mobile wooot -->
+            <div id="header-spacer"></div>
+
+            <!-- actual content -->
+            {% block content %}{% endblock %}
+        </div>
+
     </div>
 </body>
 
@@ -92,9 +100,9 @@
 
     });
 
-    //GA yaya I know; I like seeing how many hits I get sue me.
-    //"ooh but server side hits count" GA is just way to easy to implement,
-    //maybe one day I'll switch over.
+    // GA yaya I know; I like seeing how many hits I get sue me.
+    // "ooh but server side hits count" GA is just way to easy to implement,
+    // maybe one day I'll switch over.
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
