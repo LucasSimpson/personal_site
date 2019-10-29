@@ -29,10 +29,9 @@ class IndexView(TemplateView):
     template_name = 'index/index/index.html'
 
     def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['fun_links'] = sorted(FunLink.all(), key=lambda link: -link.id)
-        context['blog_posts'] = list(sorted(BlogPost.all(), key=lambda bp: -bp.date_created.timestamp()))[:5]
-        return context
+        return {
+            'blog_posts': list(sorted(BlogPost.all(), key=lambda bp: -bp.date_created.timestamp()))[:5]
+        }
 
 
 class AboutView(TemplateView):

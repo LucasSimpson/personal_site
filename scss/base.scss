@@ -1,15 +1,5 @@
 @import 'global';
 
-$top-bar-height: 5px;
-$total-height: 54px;
-$font-size: 28px;
-
-$total-height-small: 65px;
-$font-size-small: 27px;
-
-$page-width: 970px;
-$nav-width: 220px;
-
 
 #lucas-universe {
   margin: auto;
@@ -24,12 +14,9 @@ $nav-width: 220px;
 }
 
 #header {
-  //background-color: $primary;
-
   height: $total-height - 1px;
   width: 100%;
 
-  //position: fixed;
   z-index: 1;
   top: 0;
 
@@ -38,9 +25,6 @@ $nav-width: 220px;
     width: 100%;
 
     background: $primary;
-
-    /* hack to fix centering issues */
-    padding-right: $nav-width;
   }
 
   #bottom-bar {
@@ -66,6 +50,7 @@ $nav-width: 220px;
     position: fixed;
     top: ($total-height - $top-bar-height - $font-size) / 2 + $top-bar-height;
     right: ($total-height - $top-bar-height - $font-size) / 2;
+    z-index: 999;
 
     font-size: $font-size;
     @extend .font-white-primary;
@@ -82,9 +67,6 @@ $nav-width: 220px;
       display: block;
     }
   }
-
-  /* hack to fix centering issues */
-  padding-right: $nav-width;
 }
 @media (max-width: $page-width) {
   #header {
@@ -94,7 +76,7 @@ $nav-width: 220px;
 
 #header-spacer {
   height: $total-height;
-  display: block;
+  display: none;
 }
 
 
@@ -134,6 +116,7 @@ $nav-space: 32px;
 #side-nav {
   background-color: $background-color;
   position: fixed;
+  top: 0;
 
   margin: 0;
   padding: 0;
@@ -160,7 +143,7 @@ $nav-space: 32px;
   #icon-links {
     flex: 0 1 auto;
 
-    margin: $chips-size auto;
+    margin: $chips-size * 1.5 auto $chips-size auto;
 
     width: 100%;
 
@@ -198,23 +181,27 @@ $nav-space: 32px;
   }
 
   #nav-links {
-    flex: 1 1 auto;
-    list-style: none;
-    text-align: right;
-    padding: 0 ((($nav-width - $chips-size*2) / 2)+2px) 0 0;
-    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
 
-    li {
-      width: 100%;
-      margin: 0 0 12px 0;
+    margin-bottom: $chips-size;
+
+    p {
+      margin: 2px 0;
     }
 
     .nav-link {
-      font-size: 20px;
+      font-size: 16px;
       text-decoration: none;
-      color: $secondary-light;
-      opacity: 0.87;
+      color: $blue-light;
     }
+  }
+
+  #sidenav-space-filler {
+    flex: 1 1 auto;
   }
 
   @media (max-width: $page-width) {
@@ -240,16 +227,12 @@ $nav-space: 32px;
     width: 100%;
     height: auto;
 
-    margin-top: $total-height;
-
     #beautiful-me {
       display: none;
     }
 
     #icon-links {
       order: 99; /* make it last; below actual links */
-
-      margin: 0 auto (-$chips-size / 2) auto;
     }
 
     #nav-links {
@@ -270,16 +253,11 @@ $nav-space: 32px;
   }
 }
 
-@media (max-width: 576px) {
-  #side-nav {
-    margin-top: 60px;
-  }
-}
-
 #scroll-content {
   background: $background-color;
 
-  padding-left: $nav-width;
+  padding: 0 0 24px $nav-width;
+  //padding-left: $nav-width;
   width: 100%;
   height: 100%;
   min-height: 100vh;

@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+from funlinks import FunLink
+
+
+class FunLinksListsView(TemplateView):
+    template_name = 'fun_links/fun_links_list.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            'fun_links': sorted(FunLink.all(), key=lambda link: -link.id)
+        }
+

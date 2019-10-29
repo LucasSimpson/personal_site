@@ -31,5 +31,6 @@ urlpatterns = [
 
     url(r'^', include(('index.urls', 'index'), namespace='index')),
     url(r'^blog/', include(('blog.urls', 'blog'), namespace='blog')),
+    url(r'^links/', include(('funlinks.urls', 'fun_links'), namespace='fun_links')),
     url(r'^api/v1/', include(('api.urls', 'api'), namespace='api')),
 ]

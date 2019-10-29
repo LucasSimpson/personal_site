@@ -34,8 +34,6 @@
                 </a>
             </div>
 
-{#            {% include "misc/spacer.html" %}#}
-
             <div id="icon-links">
                 <a id="first" class="icon-link text-center" href="https://github.com/LucasSimpson">
                     <img src="{% static 'images/GitHub-Mark-Light-64px.png' %}">
@@ -45,13 +43,18 @@
                 </a>
             </div>
 
-{#            {% include "misc/spacer.html" %}#}
+            <div id="nav-links">
+                <p><a class="nav-link" href="{% url 'index:index' %}">Home</a></p>
+                <p><a class="nav-link" href="{% url 'index:about' %}">About</a></p>
+                <p><a class="nav-link" href="{% url 'fun_links:fun-links-list' %}">Links</a></p>
+                <p><a class="nav-link" href="{% url 'blog:posts-list' %}">Archive</a></p>
+            </div>
 
-            <ul id="nav-links">
-                <li><a class="nav-link" href="{% url 'index:index' %}">Home</a></li>
-                <li><a class="nav-link" href="{% url 'blog:posts-list' %}">Blog</a></li>
-                <li><a class="nav-link" href="{% url 'index:about' %}">About</a></li>
-            </ul>
+            <div class="show-large">
+                {% include "misc/spacer.html" %}
+            </div>
+
+            <div id="sidenav-space-filler"></div>
 
             <footer>
                 <p id="email">lucassimpson05@gmail.com</p>

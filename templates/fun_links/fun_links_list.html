@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    <p>
+        This is a collection of links that I've found interesting and/or useful. They're sorted by when I added them,
+        other than that it's a total mix and match of everything.
+    </p>
+
+    <div id="links-container">
+        {% for link in fun_links %}
+            <div class="link">
+                <a href="{{ link.link }}">{{ link.title }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{%  endblock %}

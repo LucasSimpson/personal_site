@@ -76,6 +76,19 @@ $font-secondary: #000000;
 $background-color: rgb(37, 36, 52);
 
 
+/* some sizing constants */
+
+$top-bar-height: 5px;
+$total-height: 54px;
+$font-size: 28px;
+
+$total-height-small: 65px;
+$font-size-small: 27px;
+
+$page-width: 970px;
+$nav-width: 220px;
+
+
 /* bootstrap copy overs */
 html {
   font-family: sans-serif;
@@ -199,4 +212,13 @@ a {
 .font-white-secondary {
   color: #FFFFFF;
   opacity: 0.7;
+}
+
+.show-large {
+  display: none;
+}
+@media (min-width: $page-width) {
+  .show-large {
+    display: block;
+  }
 }
