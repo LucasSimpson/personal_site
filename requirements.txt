@@ -39,7 +39,7 @@ ply==3.8
 protobuf==3.1.0.post1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
-pycryptodome==3.4.3
+pycryptodome==3.6.6
 pyparsing==2.2.0
 Pyrebase==3.0.27
 python-dateutil==2.6.1
