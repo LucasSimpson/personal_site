@@ -42,8 +42,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'django.contrib.sitemaps',
-    'django.contrib.auth',  # uncommented so rest_framework works
-    'django.contrib.contenttypes',  # uncommented so rest_framework works
+    'django.contrib.auth',              # required by djanggo rest framework
+    'django.contrib.contenttypes',      # required by djanggo rest framework
     'django.contrib.staticfiles',
 
     # main app
@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'api',
 
     # S3 file storage
-    'storages',
+    # 'storages',
 
     # DynamoDB
     'django_dynamodb',
@@ -84,7 +84,14 @@ MIDDLEWARE = [
     # cors middleware
     'corsheaders.middleware.CorsMiddleware',
 
+    # django security
     'django.middleware.security.SecurityMiddleware',
+
+    # whitenoise
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    # rest
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -176,30 +183,46 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-AWS_STORAGE_BUCKET_NAME = 'lucas-simpson-personal-site-static'
-AWS_ACCESS_KEY_ID = 'AKIAIHOL64GDXSEZWXJQ'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_IS_GZIPPED = True  # enable gzip compression
+# AWS_STORAGE_BUCKET_NAME = 'lucas-simpson-personal-site-static'
+# AWS_ACCESS_KEY_ID = 'AKIAIHOL64GDXSEZWXJQ'
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# AWS_IS_GZIPPED = True  # enable gzip compression
+
 
 # use local for dev
-if DEBUG:
-    STATIC_URL = '/static/'
-else:
-    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
-# Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
-# you run `collectstatic`).
-if not DEBUG:
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# if DEBUG:
+#     STATIC_URL = '/static/'
+# else:
+#     STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
+# where to find static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+# where to put them on HD
+STATIC_ROOT = 'staticfiles/'
+
+# where to serve them
+STATIC_URL = '/staticfiles/'
+
+
+# Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
+# you run `collectstatic`).
+
+# if not DEBUG:
+#     # STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # DynamoDB
+
 DYNAMO_TABLE_PREFIX = 'PersonalSite'
 
+
 # Django Rest Framework
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -218,5 +241,6 @@ REST_FRAMEWORK = {
 }
 
 # cors. No way to whitelist chrome extension, so here we are
+
 CORS_ORIGIN_ALLOW_ALL = True
 

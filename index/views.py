@@ -5,6 +5,7 @@ from django.views.generic.base import RedirectView
 from blog import BlogPost
 from funlinks import FunLink
 from klu_pythonapi.notifications import push
+from utils.view_decorators import cache_control
 from workexperience import WorkExperience
 
 
@@ -13,20 +14,26 @@ class KluView(TemplateView):
 
     template_name = 'index/klu.html'
 
-    def get_context_data(self, **kwargs):
-        msg = kwargs.get('message', '')
-        if msg:
-            push('lucassimpson.com', 'Demo Success', msg)
+    # disabling cause this is public and I don't want y'all spamming the HELL outta this
 
-        return {
-            'message': msg
-        }
+    # def get_context_data(self, **kwargs):
+    #     msg = kwargs.get('message', '')
+    #     if msg:
+    #         push('lucassimpson.com', 'Demo Success', msg)
+    #
+    #     return {
+    #         'message': msg
+    #     }
 
 
 class IndexView(TemplateView):
     """Main landing page."""
 
     template_name = 'index/index/index.html'
+
+    @cache_control(4 * 60 * 60)
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         return {
@@ -39,10 +46,9 @@ class AboutView(TemplateView):
 
     template_name = 'index/about/about.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(AboutView, self).get_context_data(**kwargs)
-        context['work_experiences'] = sorted(WorkExperience.all(), key=lambda we: -we.chrono_order)
-        return context
+    @cache_control(4 * 60 * 60)
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
 
 
 class ResumeRedirectView(RedirectView):
