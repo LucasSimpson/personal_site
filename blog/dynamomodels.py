@@ -12,6 +12,7 @@ class BlogPost(BaseModel):
     last_modified = fields.DateTimeField()
     url_title = fields.CharField()
     title = fields.CharField()
+    witty_subtitle = fields.CharField()
     content = fields.CharField()
 
     def save(self):

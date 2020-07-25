@@ -37,7 +37,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         return {
-            'blog_posts': list(sorted(BlogPost.all(), key=lambda bp: -bp.date_created.timestamp()))[:5]
+            'blog_posts': list(sorted(BlogPost.all(), key=lambda bp: -bp.date_created.timestamp()))
         }
 
 

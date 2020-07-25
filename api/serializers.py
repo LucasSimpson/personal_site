@@ -71,6 +71,7 @@ class BlogPostSerializer(LucasAuthenticationSerializer):
     last_modified = serializers.DateTimeField(read_only=True)
     url_title = serializers.CharField()
     title = serializers.CharField()
+    witty_subtitle = serializers.CharField()
 
     content = serializers.CharField()
 
