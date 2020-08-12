@@ -3,10 +3,7 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 
 from blog import BlogPost
-from funlinks import FunLink
-from klu_pythonapi.notifications import push
 from utils.view_decorators import cache_control
-from workexperience import WorkExperience
 
 
 class KluView(TemplateView):
