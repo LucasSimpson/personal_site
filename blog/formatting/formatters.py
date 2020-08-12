@@ -60,9 +60,60 @@ class ChainedFormatter(Formatter):
         return result
 
 
+class ChoiceFormatter(Formatter):
+    """
+    Takes two formatters and a conditional.
+    uses the first formatter if the condition is met,
+    otherwise uses the second
+    """
+
+    def __init__(self, limit_to: int=-1):
+        super().__init__(limit_to)
+        self._first_formatter = self.get_first_formatter()
+        self._second_formatter = self.get_second_formatter()
+        self._cond_func = self.get_cond_func()
+
+    def format(self, text: str) -> str:
+        if self._cond_func(text):
+            self._first_formatter.limit_to = self.limit_to
+            return self._first_formatter.format(text)
+        else:
+            self._second_formatter.limit_to = self.limit_to
+            return self._second_formatter.format(text)
+
+    def get_first_formatter(self) -> Formatter:
+        if hasattr(self, 'first_formatter') and self.first_formatter is not None:
+            return self.first_formatter
+
+        raise Exception(f'{self.__class__} must implement a first_formatter')
+
+    def get_second_formatter(self) -> Formatter:
+        if hasattr(self, 'second_formatter') and self.second_formatter is not None:
+            return self.second_formatter
+
+        raise Exception(f'{self.__class__} must implement a second_formatter')
+
+    def get_cond_func(self):
+        if hasattr(self, 'cond_func') and self.cond_func is not None:
+            return self.cond_func
+
+        raise Exception(f'{self.__class__} must implement a cond_func')
+
+
 class ToParagraphs(Formatter):
     text_capture = SplitCapture('  ')
     transformer = HTMLTagWrapperTransformer('p')
+
+
+class HTMLParagraphs(Formatter):
+    text_capture = SplitCapture('<p>')
+    transformer = Transformer()
+
+
+class ParagraphChoiceFormatter(ChoiceFormatter):
+    first_formatter = HTMLParagraphs()
+    second_formatter = ToParagraphs()
+    cond_func = lambda _, text: text[0] == '<'  # probably HTML content
 
 
 class ToItalics(Formatter):

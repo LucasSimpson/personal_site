@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.utils import timezone
 
-from blog.formatting.formatters import ToParagraphs, ToItalics, ToBold, Linkify, Formatter
+from blog.formatting.formatters import ToParagraphs, ToItalics, ToBold, Linkify, Formatter, ParagraphChoiceFormatter
 from django_dynamodb import BaseModel, fields, register_dynamodb_model
 
 
@@ -51,7 +51,7 @@ class BlogPost(BaseModel):
 
     def preview_as_html(self):
         formatter = Formatter.chain([
-            ToParagraphs(2),
+            ParagraphChoiceFormatter(2),
             ToItalics(),
             ToBold(),
             Linkify(),

@@ -17,5 +17,27 @@
 
     #blog-post {
         margin-top: 12px;
+
+        // HTML blog content formatting
+        h4 {
+            display: block;
+            font-size: 24px;
+            margin-block-start: 1.33em;
+            margin-block-end: .33em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        code {
+            border-radius: 5px;
+            border-width: 0;
+            background-color: $grey-700;
+            padding: 0 4px;
+        }
+
+        table {
+            color: #ffffff;
+            border-spacing: 8px 0;
+        }
     }
 }

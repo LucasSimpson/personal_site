@@ -9,7 +9,6 @@
     {% for post in blog_posts %}
         <div id="blog-container">
             <h1 id="post-title">{{ post.title }}</h1>
-{#            <h4 id="post-date">{{ post.date_created }}</h4>#}
             <h4 id="post-date">
                 {% if post.witty_subtitle %}{{ post.witty_subtitle }} - {% endif %}
                 {{ post.date_created }}
